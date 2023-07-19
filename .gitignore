@@ -58,3 +58,7 @@ baseline.json
 # Husky
 .husky/_
 aio/content/examples/.DS_Store
+
+# Angular
+.angular/
+package-lock.json
