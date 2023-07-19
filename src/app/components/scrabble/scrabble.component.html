@@ -1,0 +1,10 @@
+<div class="flex flex-row" tabindex="1" (focus)="pageFocus()">
+    <ng-container *ngFor="let input of inputs; let i = index">
+        <input id="input{{i}}" name="input{{i}}" (focus)="focusInput(i)" type="text" class="scrabble-input"
+            maxlength="1" #inputScrabble [ngModel]="inputs[i]" (keyup)="scrabbleKeyUp($event, i)"
+            [ngModelOptions]="{standalone: true}">
+    </ng-container>
+</div>
+
+
+<div><button (click)="test()" class="bg-gray-500">eee</button></div>
