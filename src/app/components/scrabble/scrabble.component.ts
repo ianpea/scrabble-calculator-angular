@@ -9,6 +9,7 @@ export class ScrabbleComponent implements OnInit, AfterViewInit {
   MAX_INPUT_LEN = 10;
   inputs: string[] = [];
   currentIndex = 0;
+  showTopScores = false;
 
   @ViewChildren('inputScrabble') inputScrabble: QueryList<ElementRef> | null = null;
 
@@ -20,29 +21,47 @@ export class ScrabbleComponent implements OnInit, AfterViewInit {
     this.inputScrabble?.first.nativeElement.focus();
   }
 
-  scrabbleKeyUp(event: KeyboardEvent, index: number): void {
-    const value = (event.target as HTMLInputElement).value;
-    console.log(event);
-    if(event.key == 'Enter') {
-      this.submit();
-    } else if(value == ' ') {
+  scrabbleTileInput(value: string, index: number): void {
+    console.log(value);
+    if(value == ' ') {
+      this.inputs[index] = '';
       this.refocus();
-    } else if(index < this.MAX_INPUT_LEN && value && event.key != 'Backspace') {
+    } else if(index < this.MAX_INPUT_LEN && value) {
       this.currentIndex++;
       this.refocus();
     }
-    else {
-      if(index < this.MAX_INPUT_LEN) {
-        this.currentIndex--;
-      }
-      this.refocus();
-    }
+  }
 
+  scrabbleTileKeyUp(event: KeyboardEvent, index: number): void {
+    console.log(event);
+    if(event.key == 'Backspace') {
+      this.backspace(index);
+    } else if(event.key == 'Enter') {
+      this.submit();
+    } else if(event.key == ' ') {
+      this.inputs[this.currentIndex] = '';
+    } else {
+      if(this.inputs[index] && this.currentIndex < this.MAX_INPUT_LEN) {
+        this.currentIndex++;
+        this.inputs[this.currentIndex] = event.key;
+        this.refocus();
+      }
+    }
+  }
+
+  backspace(index: number): void {
+    if(index > 0) {
+      this.currentIndex--;
+    }
+    console.log(this.currentIndex);
+    this.refocus();
   }
 
   focusInput(index: number) {
-    this.currentIndex = index;
-
+    if(index > 0) {
+      this.currentIndex = index;
+    }
+    this.refocus();
   }
 
   refocus() {
@@ -58,7 +77,8 @@ export class ScrabbleComponent implements OnInit, AfterViewInit {
 
   submit(): void {
     let a = this.scrabbleWord();
-    alert(a);
+
+    console.log(this.inputs);
   };
 
   @HostListener('window:focus', ['$event'])
@@ -68,9 +88,30 @@ export class ScrabbleComponent implements OnInit, AfterViewInit {
     }
   }
 
+  resetTiles(): void {
+    this.currentIndex = 0;
+    this.refocus();
+    this.inputScrabble?.forEach(scrabbleTile => {
+      scrabbleTile.nativeElement.value = '';
+    });
+  }
+
+  saveScore(): void {
+
+  }
+
+  viewTopScores(show: boolean): void {
+    this.showTopScores = show;
+    console.log(show);
+  }
+
   test(): void {
     this.submit();
   }
 
+
+  trackByFn(index: number, item: string) {
+    return index;
+  }
 
 }

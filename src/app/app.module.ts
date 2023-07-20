@@ -5,16 +5,20 @@ import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {ScrabbleComponent} from './components/scrabble/scrabble.component';
 import {FormsModule} from '@angular/forms';
+import {TopScoresComponent} from './components/top-scores/top-scores.component';
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ScrabbleComponent
+    ScrabbleComponent,
+    TopScoresComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
