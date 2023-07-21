@@ -1,4 +1,4 @@
-import {AfterContentChecked, AfterViewInit, Component, ElementRef, HostListener, OnInit, QueryList, ViewChildren} from '@angular/core';
+import {AfterContentChecked, AfterViewInit, ChangeDetectorRef, Component, ElementRef, HostListener, OnInit, QueryList, ViewChildren} from '@angular/core';
 
 @Component({
   selector: 'app-scrabble',
@@ -10,8 +10,10 @@ export class ScrabbleComponent implements OnInit, AfterViewInit {
   inputs: string[] = [];
   currentIndex = 0;
   showTopScores = false;
+  scribbleInputRegex = /\S/gm;
 
   @ViewChildren('inputScrabble') inputScrabble: QueryList<ElementRef> | null = null;
+  constructor (private changeDetector: ChangeDetectorRef) { }
 
   ngOnInit(): void {
     this.inputs = Array(this.MAX_INPUT_LEN).fill('');
@@ -33,13 +35,10 @@ export class ScrabbleComponent implements OnInit, AfterViewInit {
   }
 
   scrabbleTileKeyUp(event: KeyboardEvent, index: number): void {
-    console.log(event);
     if(event.key == 'Backspace') {
       this.backspace(index);
     } else if(event.key == 'Enter') {
       this.submit();
-    } else if(event.key == ' ') {
-      this.inputs[this.currentIndex] = '';
     } else {
       if(this.inputs[index] && this.currentIndex < this.MAX_INPUT_LEN) {
         this.currentIndex++;
@@ -47,6 +46,9 @@ export class ScrabbleComponent implements OnInit, AfterViewInit {
         this.refocus();
       }
     }
+
+    this.changeDetector.detectChanges();
+    console.log(this.inputs);
   }
 
   backspace(index: number): void {
