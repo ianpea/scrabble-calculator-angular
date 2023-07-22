@@ -7,20 +7,18 @@ import {ScrabbleComponent} from './components/scrabble/scrabble.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {TopScoresComponent} from './components/top-scores/top-scores.component';
 import {HttpClientModule} from '@angular/common/http';
-import {TooltipComponent} from './components/tooltip/tooltip.component';
-import {TooltipDirective} from './components/tooltip/tooltip.directive';
-import {ToastComponent} from './components/toast/toast.component';
 import {ToastModule} from 'primeng/toast';
 import {MessageService} from 'primeng/api';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {TooltipModule} from 'primeng/tooltip';
+import {DialogService, DynamicDialogModule} from 'primeng/dynamicdialog';
+import {httpInterceptorProviders} from './http-interceptors';
+
 @NgModule({
   declarations: [
     AppComponent,
     ScrabbleComponent,
     TopScoresComponent,
-    TooltipComponent,
-    TooltipDirective,
-    ToastComponent
   ],
   imports: [
     BrowserModule,
@@ -30,9 +28,12 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     ReactiveFormsModule,
     ToastModule,
     BrowserModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    TooltipModule,
+    DynamicDialogModule
+
   ],
-  providers: [MessageService],
+  providers: [MessageService, DialogService, httpInterceptorProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

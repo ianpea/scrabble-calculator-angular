@@ -5,7 +5,6 @@ import {MessageService} from 'primeng/api';
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
-  providers: [MessageService]
 
 })
 export class AppComponent implements OnInit {
