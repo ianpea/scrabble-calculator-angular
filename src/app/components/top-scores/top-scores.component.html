@@ -19,16 +19,16 @@
     <table class="table-auto w-full border-collapse border-2 border-slate-400">
         <thead>
             <tr>
-                <th class="border border-slate-400 p-2">No.</th>
-                <th class="border border-slate-400 p-2">Word</th>
-                <th class="border border-slate-400 p-2">Score</th>
+                <th class="border border-slate-400 p-2 text-center">No.</th>
+                <th class="border border-slate-400 p-2 text-center">Word</th>
+                <th class="border border-slate-400 p-2 text-center">Score</th>
             </tr>
         </thead>
         <tbody>
             <tr *ngFor="let score of scorePage?.data; let i = index">
-                <td class="border border-slate-400 p-2">{{i+1}}</td>
-                <td class="border border-slate-400 p-2">{{score.word}}</td>
-                <td class="border border-slate-400 p-2">{{score.score}}</td>
+                <td class="border border-slate-400 p-2 text-center">{{i+1}}</td>
+                <td class="border border-slate-400 p-2 text-center">{{score.word}}</td>
+                <td class="border border-slate-400 p-2 text-center">{{score.score}}</td>
             </tr>
         </tbody>
     </table>
