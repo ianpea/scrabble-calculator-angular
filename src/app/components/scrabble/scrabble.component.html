@@ -10,7 +10,7 @@
     <div class="flex flex-row flex-wrap justify-around sm:w-1/2 md:w-3/4 lg:w-3/4" tabindex="1" (focus)="pageFocus()">
         <div class="scrabble-input-container flex flex-col relative flex-grow-0"
             *ngFor="let scrabbleControl of scrabbleControls; let i = index; trackBy: trackByFn">
-            <input (focus)="refocus()" (blur)="refocus()" type="text"
+            <input id="indexId{{i}}" (focus)="refocus()" (blur)="refocus()" type="text"
                 class="scrabble-input dark:scrabble-input dark:bg-gray-700 dark:text-gray-300" maxlength="1"
                 #inputScrabble [formControl]="scrabbleControl" (keydown)="scrabbleTileKeyUp($event, i)">
             <div class="flex justify-center absolute bottom-3 right-3 text-xs dark:text-gray-100">
@@ -52,4 +52,4 @@
 
 </div>
 
-<app-top-scores (close)="viewTopScores(false)" [total]="MAX_INPUT_LEN" *ngIf="showTopScores"></app-top-scores>
+<app-top-scores (close)="viewTopScores(false)" [total]="MAX_TILES" *ngIf="showTopScores"></app-top-scores>

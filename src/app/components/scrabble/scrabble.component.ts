@@ -14,7 +14,7 @@ import {TopScoresComponent} from '../top-scores/top-scores.component';
 
 })
 export class ScrabbleComponent implements OnInit, AfterViewInit {
-  MAX_INPUT_LEN = 10;
+  MAX_TILES = 10;
 
   scrabbleControls: FormControl[] = [];
   scribbleInputRegex = new RegExp('^[a-zA-Z]$');
@@ -38,7 +38,7 @@ export class ScrabbleComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     // Push a set of controllers base on MAX_INPUT_LEN
-    for(let i = 0; i < this.MAX_INPUT_LEN; i++) {
+    for(let i = 0; i < this.MAX_TILES; i++) {
       this.scrabbleControls.push(new FormControl(""));
     }
 
@@ -70,7 +70,7 @@ export class ScrabbleComponent implements OnInit, AfterViewInit {
     if(value == ' ') {
       this.scrabbleControls[index].patchValue("");
       this.refocus();
-    } else if(index < this.MAX_INPUT_LEN && value) {
+    } else if(index < this.MAX_TILES && value) {
       this.refocus();
     }
   }
@@ -80,7 +80,7 @@ export class ScrabbleComponent implements OnInit, AfterViewInit {
    */
   scrabbleTileKeyUp(event: KeyboardEvent, index: number): void {
     if(event.key == 'Backspace') {
-      this.clearInput(index);
+      this.clearTile(index);
     } else if(event.key == 'Enter') {
       this.saveScore();
     }
@@ -90,7 +90,7 @@ export class ScrabbleComponent implements OnInit, AfterViewInit {
    * Clear the char on the given scribble tile.
    * @param index 
    */
-  clearInput(index: number): void {
+  clearTile(index: number): void {
     if(index > 0 && this.scrabbleControls[index].value == "") {
       this.scrabbleControls[index - 1].patchValue("");
       this.refocus();
@@ -104,13 +104,12 @@ export class ScrabbleComponent implements OnInit, AfterViewInit {
    * Will ALWAYS focus the left most empty input on the scrabble tiles.
    */
   refocus() {
-    const inputLen = this.scrabbleControls.filter(scrabbleControl => scrabbleControl.value != "").length;
-    if(inputLen < this.MAX_INPUT_LEN) {
+    const filledTilesLen = this.scrabbleControls.filter(scrabbleControl => scrabbleControl.value != "").length;
+    if(filledTilesLen < this.MAX_TILES) {
       const indexToFocus = this.scrabbleControls.findIndex(scrabbleControl => scrabbleControl.value == "");
       this.scrabbleHTMLInputs?.get(indexToFocus)?.nativeElement.focus();
     } else {
-      this.scrabbleHTMLInputs?.get(this.MAX_INPUT_LEN - 1)?.nativeElement.focus();
-
+      this.scrabbleHTMLInputs?.get(this.MAX_TILES - 1)?.nativeElement.focus();
     }
   }
 
