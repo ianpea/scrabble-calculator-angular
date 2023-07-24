@@ -1,9 +1,9 @@
-# Scrabble Calculator (Laravel)
+# Scrabble Calculator (Angular)
 
 
 ## MacOS
 ### Prerequisites
-NodeJS v18
+NodeJS v18, NPM
 
 ### Deploy Steps
 Using terminal, in project root folder, run below commands to prepare the frontend.
@@ -32,7 +32,7 @@ To generate test cases results for Angular, run the below command
         npm start
 
 ## Angular Tests
-To generate test cases results for Angular, run the below command
+To generate test case results for Angular using Jasmine, run the below command
         
         ng test
 
