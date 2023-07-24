@@ -1,27 +1,45 @@
-# ScrabbleCalculatorAngular
+# Scrabble Calculator (Laravel)
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.1.4.
 
-## Development server
+## MacOS
+### Prerequisites
+NodeJS v18
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+### Deploy Steps
+Using terminal, in project root folder, run below commands to prepare the frontend.
 
-## Code scaffolding
+1) Install dependencies 
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+        npm install
 
-## Build
+2) Start the app
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+        npm start
 
-## Running unit tests
+## Angular Tests
+To generate test cases results for Angular, run the below command
+        
+        ng test
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## Windows
 
-## Running end-to-end tests
+1) Install dependencies 
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+        npm install
 
-## Further help
+2) Start the app
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+        npm start
+
+## Angular Tests
+To generate test cases results for Angular, run the below command
+        
+        ng test
+
+
+## Expected Results
+### Deployed (`npm start`)
+![Alt text](<SS 2023-07-25 at 07.44.49.png>)
+
+### Unit & Feature Tests (`ng test`)
+![Alt text](<SS 2023-07-25 at 07.43.47.png>)
