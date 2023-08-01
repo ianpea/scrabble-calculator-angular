@@ -5,14 +5,16 @@ import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {ScrabbleComponent} from './components/scrabble/scrabble.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {TopScoresComponent} from './components/top-scores/top-scores.component';
+import {TopScoresComponent} from './components/dialogs/top-scores/top-scores.component';
 import {HttpClientModule} from '@angular/common/http';
 import {ToastModule} from 'primeng/toast';
 import {MessageService} from 'primeng/api';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {TooltipModule} from 'primeng/tooltip';
 import {DialogService, DynamicDialogModule} from 'primeng/dynamicdialog';
+import {DialogModule} from 'primeng/dialog';
 import {httpInterceptorProviders} from './http-interceptors';
+import {PaginatorModule} from 'primeng/paginator';
 
 @NgModule({
   declarations: [
@@ -30,8 +32,9 @@ import {httpInterceptorProviders} from './http-interceptors';
     BrowserModule,
     BrowserAnimationsModule,
     TooltipModule,
-    DynamicDialogModule
-
+    DynamicDialogModule,
+    DialogModule,
+    PaginatorModule
   ],
   providers: [MessageService, DialogService, httpInterceptorProviders],
   bootstrap: [AppComponent]

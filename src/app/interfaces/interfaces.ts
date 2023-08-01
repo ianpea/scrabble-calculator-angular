@@ -10,11 +10,23 @@ export interface Score {
     already_exists: boolean;
 }
 
-export interface LaravelPage<T> {
+export interface ScorePage<T> {
     data: T[];
+    current_page: number;
+    total: number;
+    last_page: number;
+    from: number;
 }
 
 export interface Toast {
     message: string;
     show: boolean;
+}
+
+export interface PageEvent {
+    first: number;
+    rows: number;
+    page: number;
+    pageCount: number;
+    total: number;
 }

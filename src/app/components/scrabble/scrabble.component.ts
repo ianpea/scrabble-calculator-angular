@@ -2,10 +2,9 @@ import {AfterViewInit, Component, ElementRef, HostListener, OnInit, QueryList, V
 import {FormControl} from '@angular/forms';
 import {Constants} from '../../constants/constants';
 import {HttpClient, HttpErrorResponse, HttpResponse} from '@angular/common/http';
-import {Score, ScoreMapping} from 'src/app/interfaces/interfaces';
+import {Score} from 'src/app/interfaces/interfaces';
 import {MessageService} from 'primeng/api';
 import {DialogService} from 'primeng/dynamicdialog';
-import {TopScoresComponent} from '../top-scores/top-scores.component';
 
 @Component({
   selector: 'app-scrabble',
@@ -15,9 +14,10 @@ import {TopScoresComponent} from '../top-scores/top-scores.component';
 })
 export class ScrabbleComponent implements OnInit, AfterViewInit {
   MAX_TILES = 10;
+  SCORE_PER_PAGE = 10;
 
   scrabbleControls: FormControl[] = [];
-  scribbleInputRegex = new RegExp('^[a-zA-Z]$');
+  scrabbleInputRegex = new RegExp('^[a-zA-Z]$');
 
   showTopScores = false;
 
@@ -45,7 +45,7 @@ export class ScrabbleComponent implements OnInit, AfterViewInit {
     // Listen to each state updates of each input FormControl.
     this.scrabbleControls.forEach((scrabbleControl, i) => {
       scrabbleControl.valueChanges.subscribe(value => {
-        let passRegex = this.scribbleInputRegex.test(value);
+        let passRegex = this.scrabbleInputRegex.test(value);
         // If pass regex, patch the value and make it uppercase.
         if(value && passRegex) {
           scrabbleControl.patchValue(value.toUpperCase(), {emitEvent: false});
@@ -61,18 +61,6 @@ export class ScrabbleComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     this.refocus();
-  }
-
-  /**
-   * Event handler for the input of CHARACTERS on each tile.
-   */
-  scrabbleTileInput(value: string, index: number): void {
-    if(value == ' ') {
-      this.scrabbleControls[index].patchValue("");
-      this.refocus();
-    } else if(index < this.MAX_TILES && value) {
-      this.refocus();
-    }
   }
 
   /**
@@ -166,12 +154,7 @@ export class ScrabbleComponent implements OnInit, AfterViewInit {
    * @param show true to show, false to hide.
    */
   viewTopScores(show: boolean): void {
-    // this.showTopScores = show;
-    this.dialogService.open(TopScoresComponent, {
-      width: '60%',
-      closable: true,
-      closeOnEscape: true
-    });
+    this.showTopScores = show;
   };
 
   /**

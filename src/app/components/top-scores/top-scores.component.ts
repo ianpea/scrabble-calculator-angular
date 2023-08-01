@@ -1,6 +1,6 @@
 import {HttpClient} from '@angular/common/http';
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {LaravelPage, Score} from 'src/app/interfaces/interfaces';
+import {ScorePage, Score} from 'src/app/interfaces/interfaces';
 
 @Component({
   selector: 'app-top-scores',
@@ -10,7 +10,7 @@ import {LaravelPage, Score} from 'src/app/interfaces/interfaces';
 export class TopScoresComponent implements OnInit {
   @Output() close: EventEmitter<string> = new EventEmitter();
   @Input() total: number = 10;
-  scorePage: LaravelPage<Score> | undefined;
+  scorePage: ScorePage<Score> | undefined;
   loading = true;
 
   constructor (private http: HttpClient) {
@@ -25,7 +25,7 @@ export class TopScoresComponent implements OnInit {
   }
 
   topScores(): void {
-    this.http.get<LaravelPage<Score>>("/api/scores/top/" + this.total).subscribe(res => {
+    this.http.get<ScorePage<Score>>("/api/scores/top/" + this.total).subscribe(res => {
       this.scorePage = res;
       this.loading = false;
     });
