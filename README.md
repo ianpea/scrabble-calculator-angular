@@ -48,7 +48,7 @@ To generate test cases results for Angular, run the below command
 
         npm start
 
-## Angular Tests
+### Angular Tests
 To generate test case results for Angular using Jasmine, run the below command
         
         ng test
